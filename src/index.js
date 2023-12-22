@@ -1,10 +1,8 @@
 // src/index.js
 require('dotenv').config();
 const express = require("express");
-const http = require("http");
 const socketio = require("socket.io");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
 const { createServer } = require("http");
 const socketSetup = require("./socket");
 const routes = require("./routes");
