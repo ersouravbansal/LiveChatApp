@@ -6,6 +6,7 @@ const MessageSchema = new mongoose.Schema(
     name: String,
     message: String,
     chatroom: String,
+    userId: String,
   },
   { timestamps: true }
 );
