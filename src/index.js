@@ -1,8 +1,8 @@
 // src/index.js
 require('dotenv').config();
+const connectDB = require("./db");
 const express = require("express");
 const socketio = require("socket.io");
-const mongoose = require("mongoose");
 const { createServer } = require("http");
 const socketSetup = require("./socket");
 const routes = require("./routes");
@@ -13,13 +13,10 @@ const io = socketio(server);
 const messagesController = require('./controllers/messagesController');
 // Pass io instance to the controller
 messagesController.setSocketIO(io);
-const port = process.env.PORT || 3000;
-const db_url = process.env.MongodbURI;
-mongoose.connect(db_url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// Database connectivity
+connectDB();
 
+const port = process.env.PORT || 3000;
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
