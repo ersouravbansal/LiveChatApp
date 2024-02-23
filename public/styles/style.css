@@ -1,4 +1,4 @@
-.chat-container {
+/* .chat-container {
     max-width: 800px;
     margin: auto;
   }
@@ -28,5 +28,65 @@
     cursor: pointer;
   }
   .selected {
-    background-color: #a0c5e8; /* Change the background color to your preferred highlight color */
+    background-color: #a0c5e8; 
   }
+  .ptr{
+    cursor: pointer;
+  }
+   */
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.chat-box {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.message {
+  margin-bottom: 15px;
+}
+
+#messages {
+  overflow-y: auto;
+  max-height: 300px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.chatroom-block {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.selected {
+  background-color: #a0c5e8;
+}
+
+.ptr {
+  cursor: pointer;
+}
+#loginBlock,
+#signupBlock,#welcomeMessage{
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color:#fff;
+}

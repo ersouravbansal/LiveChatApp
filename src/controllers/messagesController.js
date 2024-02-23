@@ -1,11 +1,11 @@
 const Message = require('../models/Message');
 const { generateName, generateLoremIpsum } = require('../utils/loremIpsumGenerator');
 
-let io; // Declare io at the top of the file
+let io;
 
 const messagesController = {
   setSocketIO: (socketIO) => {
-    io = socketIO; // Set io when the server starts
+    io = socketIO;
   },
 
   async getMessages(req, res) {
@@ -14,22 +14,35 @@ const messagesController = {
       res.send(messages);
     } catch (err) {
       console.error(err);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ error: 'Failed to retrieve messages' });
     }
   },
 
   async postMessage(req, res) {
     try {
-      let message = new Message(req.body);
+      const { user } = req.session;
+
+      if (!user) {
+        return res.status(401).json({ error: 'Unauthorized - Please login to send messages.' });
+      }
+
+      const messageData = {
+        ...req.body,
+        name: user.username,
+      };
+
+      const message = new Message(messageData);
       await message.save();
-      io.to(req.body.chatroom).emit('message', req.body);
+
+      io.to(req.body.chatroom).emit('message', messageData);
+
       res.sendStatus(200);
     } catch (err) {
       console.error(err);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ error: 'Failed to post message' });
     }
   },
-
+  
   async initialize(req, res) {
     try {
       const chatrooms = ['Politics', 'Cricket', 'Business'];
